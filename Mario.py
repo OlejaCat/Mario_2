@@ -86,6 +86,16 @@ class Tile(pygame.sprite.Sprite):
         self.rect = self.image.get_rect().move(
             tile_width * pos_x, tile_height * pos_y)
 
+    def update(self):
+        if self.rect.x > WIDTH:
+            self.rect.x = 100
+        if self.rect.x < 0:
+            self.rect.x = WIDTH - 100
+        if self.rect.y > HEIGHT:
+            self.rect.y = 50
+        if self.rect.y < 0:
+            self.rect.y = HEIGHT - 50
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
@@ -118,7 +128,6 @@ class Camera:
     def update(self, target):
         self.dx = -(target.rect.x + target.rect.w // 2 - WIDTH // 2)
         self.dy = -(target.rect.y + target.rect.h // 2 - HEIGHT // 2)
-        print(self.dx, self.dy)
 
 
 def generate_level(level):
